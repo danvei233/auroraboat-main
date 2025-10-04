@@ -1,85 +1,69 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import { ref } from 'vue';
+
+import router from '@/router'
+const selectedKeys = ref<string[]>(['2']);
+
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <a-layout class="layout">
+    <a-layout-header>
+      <div class="logo" >
+        <img alt="logo" src="/logo.svg" />
+        QzSystem
+      </div>
+      <a-menu
+        v-model:selectedKeys="selectedKeys"
+        theme="dark"
+        mode="horizontal"
+        :style="{ lineHeight: '64px' }"
+      >
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      </a-menu>
+    </a-layout-header>
+    <a-layout-content style="padding: 32px 50px">
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
 
-  <RouterView />
+
+      <router-view />
+    </a-layout-content>
+    <a-layout-footer style="text-align: center">
+      Qzsystem & MMUI ©2025 Created by Qz & Danvei
+    </a-layout-footer>
+  </a-layout>
 </template>
-
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.site-layout-content {
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.layout {
+  min-height: 100%;
 }
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.logo{
+  padding:0 0;
+  gap: 12px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  color: white;
 }
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
+#components-layout-demo-top .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.3);
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.ant-row-rtl #components-layout-demo-top .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+[data-theme='dark'] .site-layout-content {
+  background: #141414;
 }
 </style>
