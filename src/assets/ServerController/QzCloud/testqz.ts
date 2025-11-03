@@ -6,6 +6,7 @@ function constructor():qz.VpsManager {
   const ip = {"eth2":[],"eth1":[{"id":25,"ip":"192.168.9.25","netmask":"255.255.255.0","gateway":"192.168.9.1","mac":"00:50:56:72:D3:B3","v_name":"www","remark":"","state":2,"v_name_type":"","create_time":"2024-05-24 23:35:52","update_time":"2024-05-24 23:35:52","public_ip":"netmc.icu"}]}
   const base =  'https://idc.duncai.top/index.php/control/ecs/'
   const q = new qz.VpsManager(base,fir,os,iso,ip)
+  // 忘记取消git了 不过这个东西没啥保密必要
   q.setCookie("_pk_id.2098646811.bc0c=503e639b678aa133.1736781870.; PHPSESSID=e4386acd3e8fe1453f2a1f91231c84ce; token=8ZrmSwFEUKqDggkLxWq2gfoZHUftqBHE11760625391.5735")
   return q
 }
