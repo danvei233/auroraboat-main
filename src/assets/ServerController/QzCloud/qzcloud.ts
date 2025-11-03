@@ -92,7 +92,7 @@ export const toVpsInfo = (r:  model.RawVpsRecord, ipPayload?: unknown):  model.V
     : parseIPInfoFromNicPayload(ipPayload),
 });
 
-class VpsManager{
+export class VpsManager{
   static instance: VpsManager;
   private vpsInfo :  model.VpsInfo;
   private Re :RequestInit;
@@ -107,6 +107,7 @@ class VpsManager{
   //   }
   //   return VpsManager.instance;
   // }
+
   constructor(baseUrl:string,raw: model.RawVpsRecord, OSraw: Record<string, any[]>, CDraw: Record<string, string>,ipPayload?: unknown) {
     this.vpsInfo = toVpsInfo(raw, ipPayload)
     this.Id=this.vpsInfo.id;
@@ -115,6 +116,7 @@ class VpsManager{
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
       },
       body: `hostid=${this.Id}`,
     }
@@ -122,6 +124,9 @@ class VpsManager{
     this.NetMgr = new NetworkManager(baseUrl,this.Id,this.Re)
     this.SysMgr = new SystemManager(baseUrl,this.Id,this.Re, OSraw, CDraw)
   }
+  public setCookie(cookie:string):void{
+  this.Re.headers = {...this.Re.headers,cookie:cookie};
+}
 public get VpsInfo():  model.VpsInfo {
     return this.vpsInfo
   }
@@ -145,7 +150,7 @@ public get VpsInfo():  model.VpsInfo {
   }
   public getSystemUsage() :Promise<model.MonitorStatus>  {
     return fetch(this.baseUrl+`/monitor_host?hostid=${this.Id}`,this.Re)
-      .then(r =>r.json() )
+      .then(r =>  r.json() )
       .then(data =>{
         if (data?.code == 1){ return toStats(data)}
         throw new Error(data?.msg||'unknown error')
@@ -170,3 +175,4 @@ function toStats(raw:any):model.MonitorStatus{
 
 
 }
+export default VpsManager ;
