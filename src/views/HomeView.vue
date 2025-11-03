@@ -11,6 +11,7 @@ import FireWall from '@/components/FireWall/FireWall.vue'
 import WebProxy from '@/components/BuidWeb/WebProxy.vue'
 import SnapShot from '@/components/SnapShot.vue'
 import Backup from '@/components/Backup.vue'
+import Dev from '@/components/Dev.vue'
 </script>
 
 <template>
@@ -56,6 +57,7 @@ import Backup from '@/components/Backup.vue'
       <a-tab-pane key="7" tab="快照"> <SnapShot /></a-tab-pane>
       <a-tab-pane key="8" tab="监控"> <Monitor /> </a-tab-pane>
       <a-tab-pane key="9" tab="建站"> <WebProxy /> </a-tab-pane>
+      <a-tab-pane key="10" tab="Dev"> <Dev /> </a-tab-pane>
     </a-tabs>
 
 
